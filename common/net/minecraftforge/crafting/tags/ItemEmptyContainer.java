@@ -1,6 +1,7 @@
 package net.minecraftforge.crafting.tags;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidContainerData;
@@ -9,10 +10,6 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class ItemEmptyContainer {
-
-    protected LiquidStack filter;
-    protected String name;
-    protected int amount;
     protected boolean exact;
     protected ItemStack[] excludes;
 
@@ -23,77 +20,26 @@ public class ItemEmptyContainer {
 
     public ItemEmptyContainer(boolean exact)
     {
-        this(null, exact);
+        this(exact, null);
     }
-
-    public ItemEmptyContainer(String name, int amount)
+    
+    public ItemEmptyContainer(ItemStack[] excludes)
     {
-        this(name, amount, false);
+        this(false, excludes);
     }
-
-    public ItemEmptyContainer(String name, int amount, boolean exact)
+    
+    public ItemEmptyContainer(boolean exact, ItemStack[] excludes)
     {
-        this(name, amount, exact, null);
-    }
-
-    public ItemEmptyContainer(String name, int amount, ItemStack[] excludes)
-    {
-        this(name, amount, false, excludes);
-    }
-
-    public ItemEmptyContainer(String name, int amount, boolean exact, ItemStack[] excludes)
-    {
-        this(null, name, amount, exact, excludes);
-    }
-
-    public ItemEmptyContainer(LiquidStack filter)
-    {
-        this(filter, false);
-    }
-
-    public ItemEmptyContainer(LiquidStack filter, boolean exact)
-    {
-        this(filter, exact, null);
-    }
-
-    public ItemEmptyContainer(LiquidStack filter, ItemStack[] excludes)
-    {
-        this(filter, false, excludes);
-    }
-
-    public ItemEmptyContainer(LiquidStack filter, boolean exact, ItemStack[] excludes)
-    {
-        this(filter, null, filter != null ? filter.amount : 0, exact, excludes);
-    }
-
-    protected ItemEmptyContainer(LiquidStack filter, String name, int amount, boolean exact, ItemStack[] excludes)
-    {
-        this.filter = (filter != null ? filter.copy() : null);
-        this.name = name;
-        this.amount = amount;
         this.exact = exact;
-        this.excludes = excludes;
+        this.excludes = new ItemStack[excludes.length];
+        for(int i = 0; i < excludes.length; ++i)
+        {
+            this.excludes[i] = excludes[i].copy();
+        }
     }
 
     public ItemStack getFilledContainer(LiquidStack liquid, ItemStack container)
     {
-        if (filter == null && name != null)
-        {
-            filter = LiquidDictionary.getLiquid(name, amount);
-        }
-
-        if (filter != null || name != null)
-        {
-            if (filter == null)
-            {
-                return null;
-            }
-            else if (!filter.isLiquidEqual(liquid) || !((exact && filter.amount == liquid.amount) || (!exact && filter.amount <= liquid.amount)))
-            {
-                return null;
-            }
-        }
-
         ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(liquid, container);
 
         if (filled != null)
@@ -115,23 +61,6 @@ public class ItemEmptyContainer {
     public ArrayList<ItemStack> getFilledContainers(LiquidStack liquid)
     {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-
-        if (filter == null && name != null)
-        {
-            filter = LiquidDictionary.getLiquid(name, amount);
-        }
-
-        if (filter != null || name != null)
-        {
-            if (filter == null)
-            {
-                return result;
-            }
-            else if (!filter.isLiquidEqual(liquid) || !((exact && filter.amount == liquid.amount) || (!exact && filter.amount <= liquid.amount)))
-            {
-                return result;
-            }
-        }
 
         for (LiquidContainerData data : LiquidContainerRegistry.getRegisteredLiquidContainerData())
         {
@@ -163,23 +92,6 @@ public class ItemEmptyContainer {
     public ArrayList<LiquidContainerData> getLiquidContainerData(LiquidStack liquid)
     {
         ArrayList<LiquidContainerData> result = new ArrayList<LiquidContainerData>();
-
-        if (filter == null && name != null)
-        {
-            filter = LiquidDictionary.getLiquid(name, amount);
-        }
-
-        if (filter != null || name != null)
-        {
-            if (filter == null)
-            {
-                return result;
-            }
-            else if (!filter.isLiquidEqual(liquid) || !((exact && filter.amount == liquid.amount) || (!exact && filter.amount <= liquid.amount)))
-            {
-                return result;
-            }
-        }
 
         for (LiquidContainerData data : LiquidContainerRegistry.getRegisteredLiquidContainerData())
         {
