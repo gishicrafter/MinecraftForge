@@ -63,7 +63,11 @@ public class ItemFilledContainer implements ICraftingMaterial {
         this.name = name;
         this.amount = amount;
         this.exact = exact;
-        this.excludes = excludes;
+        this.excludes = new ItemStack[excludes.length];
+        for(int i = 0; i < excludes.length; ++i)
+        {
+            this.excludes[i] = excludes[i].copy();
+        }
     }
 
     public boolean isItemEqual(ItemStack other)
