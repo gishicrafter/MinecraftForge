@@ -52,7 +52,7 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
 
         if (recipe[idx] instanceof String[])
         {
-            String[] parts = ((String[]) recipe[idx++]);
+            String[] parts = (String[]) recipe[idx++];
 
             for (String s : parts)
             {
@@ -147,7 +147,10 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
         {
             ItemStack ingred = recipe.recipeItems[i];
 
-            if (ingred == null) continue;
+            if (ingred == null)
+            {
+                continue;
+            }
 
             input[i] = recipe.recipeItems[i];
 
@@ -233,7 +236,7 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
                 }
 
                 ItemStack slot = inv.getStackInRowAndColumn(x, y);
-                boolean isMaterial = (slot != null);
+                boolean isMaterial = slot != null;
 
                 if (target instanceof ItemStack)
                 {

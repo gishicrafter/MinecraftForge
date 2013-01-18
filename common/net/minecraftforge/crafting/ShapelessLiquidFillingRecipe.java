@@ -71,7 +71,7 @@ public class ShapelessLiquidFillingRecipe implements IForgeRecipe {
     {
         output = LiquidContainerRegistry.getLiquidForFilledItem(recipe.getRecipeOutput());
 
-        for (ItemStack ingred : ((List<ItemStack>) recipe.recipeItems))
+        for (ItemStack ingred : (List<ItemStack>) recipe.recipeItems)
         {
             Object finalObj = ingred;
             for (Entry<ItemStack, Object> replace : replacements.entrySet())
@@ -176,7 +176,10 @@ public class ShapelessLiquidFillingRecipe implements IForgeRecipe {
             }
         }
 
-        if (!required.isEmpty()) return null;
+        if (!required.isEmpty())
+        {
+            return null;
+        }
 
         if (result != null && excludeSame)
         {

@@ -77,7 +77,7 @@ public class ShapelessForgeRecipe implements IForgeRecipe {
     {
         output = recipe.getRecipeOutput();
 
-        for (ItemStack ingred : ((List<ItemStack>) recipe.recipeItems))
+        for (ItemStack ingred : (List<ItemStack>) recipe.recipeItems)
         {
             Object finalObj = ingred;
             for (Entry<ItemStack, Object> replace : replacements.entrySet())

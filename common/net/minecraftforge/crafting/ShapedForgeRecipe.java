@@ -14,7 +14,6 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.crafting.tags.ItemFilledContainer;
 import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ShapedForgeRecipe implements IForgeRecipe {
     // Added in for future ease of change, but hard coded for now.
@@ -59,7 +58,7 @@ public class ShapedForgeRecipe implements IForgeRecipe {
 
         if (recipe[idx] instanceof String[])
         {
-            String[] parts = ((String[]) recipe[idx++]);
+            String[] parts = (String[]) recipe[idx++];
 
             for (String s : parts)
             {
@@ -154,7 +153,10 @@ public class ShapedForgeRecipe implements IForgeRecipe {
         {
             ItemStack ingred = recipe.recipeItems[i];
 
-            if (ingred == null) continue;
+            if (ingred == null)
+            {
+                continue;
+            }
 
             input[i] = recipe.recipeItems[i];
 

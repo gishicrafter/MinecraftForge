@@ -17,7 +17,7 @@ public class ForgeRecipeUtils {
         {
             return false;
         }
-        return (target.itemID == input.itemID && ((target.getItemDamage() == -1 && !strict) || target.getItemDamage() == input.getItemDamage()));
+        return target.itemID == input.itemID && (target.getItemDamage() == -1 && !strict || target.getItemDamage() == input.getItemDamage());
     }
 
     public static boolean itemMatches(ArrayList<ItemStack> targets, ItemStack input)
@@ -27,7 +27,7 @@ public class ForgeRecipeUtils {
 
     public static boolean itemMatches(ArrayList<ItemStack> targets, ItemStack input, boolean strict)
     {
-        if (input == null && (targets != null && targets.size() > 0) || input != null && (targets == null || targets.size() == 0))
+        if (input == null && targets != null && targets.size() > 0 || input != null && (targets == null || targets.size() == 0))
         {
             return false;
         }
