@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 
 public class ItemOre {
-    
+
     String name;
 
     public ItemOre(String name)
@@ -15,12 +15,16 @@ public class ItemOre {
 
     public boolean isItemEqual(ItemStack other)
     {
-        for(ItemStack item : OreDictionary.getOres(name)){
-            if(item.isItemEqual(other)) return true;
+        if (other == null) return false;
+        ArrayList<ItemStack> items = OreDictionary.getOres(name);
+        if (items == null || items.isEmpty()) return false;
+        for (ItemStack item : items)
+        {
+            if (item.isItemEqual(other)) return true;
         }
         return false;
     }
-    
+
     public ArrayList<ItemStack> getOres()
     {
         return OreDictionary.getOres(name);

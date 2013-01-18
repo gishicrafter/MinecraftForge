@@ -59,7 +59,7 @@ public class ItemEmptyContainer {
 
     public ItemEmptyContainer(LiquidStack filter, boolean exact, ItemStack[] excludes)
     {
-        this(filter, null, filter.amount, exact, excludes);
+        this(filter, null, filter != null ? filter.amount : 0, exact, excludes);
     }
 
     protected ItemEmptyContainer(LiquidStack filter, String name, int amount, boolean exact, ItemStack[] excludes)
