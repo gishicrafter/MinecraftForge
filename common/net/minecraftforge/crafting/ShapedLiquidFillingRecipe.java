@@ -12,12 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
-import net.minecraftforge.liquids.ItemEmptyContainer;
-import net.minecraftforge.liquids.ItemFilledContainer;
+import net.minecraftforge.crafting.tags.ItemEmptyContainer;
+import net.minecraftforge.crafting.tags.ItemFilledContainer;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.oredict.ItemOre;
 
 public class ShapedLiquidFillingRecipe implements IForgeRecipe {
     // Added in for future ease of change, but hard coded for now.
@@ -112,7 +111,7 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
             {
                 itemMap.put(chr, new ArrayList<ItemStack>((Collection<ItemStack>) in));
             }
-            else if (in instanceof ItemOre || in instanceof ItemFilledContainer || in instanceof ItemEmptyContainer || in instanceof ICraftingMaterial)
+            else if (in instanceof ItemEmptyContainer || in instanceof ICraftingMaterial)
             {
                 itemMap.put(chr, in);
             }
@@ -157,7 +156,7 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
                 if (ForgeRecipeUtils.itemMatches(replace.getKey(), ingred, true))
                 {
                     Object value = replace.getValue();
-                    if (value instanceof ItemOre || value instanceof ItemFilledContainer || value instanceof ItemEmptyContainer
+                    if (value instanceof ItemEmptyContainer
                             || value instanceof ICraftingMaterial)
                     {
                         input[i] = value;
@@ -247,22 +246,6 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
                 {
 
                     if (!ForgeRecipeUtils.itemMatches((ArrayList<ItemStack>) target, slot))
-                    {
-                        return null;
-                    }
-                }
-                else if (target instanceof ItemOre)
-                {
-
-                    if (!((ItemOre) target).isItemEqual(slot))
-                    {
-                        return null;
-                    }
-                }
-                else if (target instanceof ItemFilledContainer)
-                {
-
-                    if (!((ItemFilledContainer) target).isItemEqual(slot))
                     {
                         return null;
                     }
@@ -416,38 +399,6 @@ public class ShapedLiquidFillingRecipe implements IForgeRecipe {
                         if (!excludeSame || !item.isItemEqual(output))
                         {
                             acceptable.add(item.copy());
-                        }
-                    }
-                    if (acceptable.size() == 0)
-                    {
-                        continue calcresult;
-                    }
-                    recipe[i] = acceptable;
-                }
-                else if (input[i] instanceof ItemOre)
-                {
-                    ArrayList<ItemStack> acceptable = new ArrayList<ItemStack>();
-                    for (ItemStack item : ((ItemOre) input[i]).getOres())
-                    {
-                        if (!excludeSame || !item.isItemEqual(output))
-                        {
-                            acceptable.add(item);
-                        }
-                    }
-                    if (acceptable.size() == 0)
-                    {
-                        continue calcresult;
-                    }
-                    recipe[i] = acceptable;
-                }
-                else if (input[i] instanceof ItemFilledContainer)
-                {
-                    ArrayList<ItemStack> acceptable = new ArrayList<ItemStack>();
-                    for (ItemStack item : ((ItemFilledContainer) input[i]).getFilledContainers())
-                    {
-                        if (!excludeSame || !item.isItemEqual(output))
-                        {
-                            acceptable.add(item);
                         }
                     }
                     if (acceptable.size() == 0)

@@ -1,8 +1,12 @@
-package net.minecraftforge.liquids;
+package net.minecraftforge.crafting.tags;
 
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class ItemEmptyContainer {
 

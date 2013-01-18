@@ -1,10 +1,15 @@
-package net.minecraftforge.liquids;
+package net.minecraftforge.crafting.tags;
 
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.crafting.ICraftingMaterial;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 
-public class ItemFilledContainer {
+public class ItemFilledContainer implements ICraftingMaterial {
 
     protected LiquidStack liquid;
     protected String name;
@@ -78,7 +83,7 @@ public class ItemFilledContainer {
         return liquid != null && ((exact && liquid.amount == this.liquid.amount) || (!exact && liquid.amount >= this.liquid.amount));
     }
 
-    public ArrayList<ItemStack> getFilledContainers()
+    public ArrayList<ItemStack> getItems()
     {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
 
@@ -118,4 +123,5 @@ public class ItemFilledContainer {
 
         return result;
     }
+
 }

@@ -12,9 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
-import net.minecraftforge.liquids.ItemFilledContainer;
+import net.minecraftforge.crafting.tags.ItemFilledContainer;
 import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.oredict.ItemOre;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ShapedForgeRecipe implements IForgeRecipe {
@@ -119,7 +118,7 @@ public class ShapedForgeRecipe implements IForgeRecipe {
             {
                 itemMap.put(chr, new ArrayList<ItemStack>((Collection<ItemStack>) in));
             }
-            else if (in instanceof ItemOre || in instanceof ItemFilledContainer || in instanceof ICraftingMaterial)
+            else if (in instanceof ICraftingMaterial)
             {
                 itemMap.put(chr, in);
             }
@@ -164,7 +163,7 @@ public class ShapedForgeRecipe implements IForgeRecipe {
                 if (ForgeRecipeUtils.itemMatches(replace.getKey(), ingred, true))
                 {
                     Object value = replace.getValue();
-                    if (value instanceof ItemOre || value instanceof ItemFilledContainer || value instanceof ICraftingMaterial)
+                    if (value instanceof ICraftingMaterial)
                     {
                         input[i] = value;
                     }
@@ -261,22 +260,6 @@ public class ShapedForgeRecipe implements IForgeRecipe {
                         return false;
                     }
                 }
-                else if (target instanceof ItemOre)
-                {
-
-                    if (!((ItemOre) target).isItemEqual(slot))
-                    {
-                        return false;
-                    }
-                }
-                else if (target instanceof ItemFilledContainer)
-                {
-
-                    if (!((ItemFilledContainer) target).isItemEqual(slot))
-                    {
-                        return false;
-                    }
-                }
                 else if (target instanceof ICraftingMaterial)
                 {
 
@@ -355,14 +338,6 @@ public class ShapedForgeRecipe implements IForgeRecipe {
                         items.add(item.copy());
                     }
                     recipe[i] = items;
-                }
-                else if (input[i] instanceof ItemOre)
-                {
-                    recipe[i] = ((ItemOre) input[i]).getOres();
-                }
-                else if (input[i] instanceof ItemFilledContainer)
-                {
-                    recipe[i] = ((ItemFilledContainer) input[i]).getFilledContainers();
                 }
                 else if (input[i] instanceof ICraftingMaterial)
                 {

@@ -13,9 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
-import net.minecraftforge.liquids.ItemFilledContainer;
+import net.minecraftforge.crafting.tags.ItemFilledContainer;
 import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.oredict.ItemOre;
 
 public class ShapelessForgeRecipe implements IForgeRecipe {
 
@@ -57,7 +56,7 @@ public class ShapelessForgeRecipe implements IForgeRecipe {
             {
                 input.add(new ArrayList<ItemStack>((Collection<ItemStack>) in));
             }
-            else if (in instanceof ItemOre || in instanceof ItemFilledContainer || in instanceof ICraftingMaterial)
+            else if (in instanceof ICraftingMaterial)
             {
                 input.add(in);
             }
@@ -86,7 +85,7 @@ public class ShapelessForgeRecipe implements IForgeRecipe {
                 if (ForgeRecipeUtils.itemMatches(replace.getKey(), ingred, true))
                 {
                     Object value = replace.getValue();
-                    if (value instanceof ItemOre || value instanceof ItemFilledContainer || value instanceof ICraftingMaterial)
+                    if (value instanceof ICraftingMaterial)
                     {
                         finalObj = value;
                     }
@@ -132,16 +131,6 @@ public class ShapelessForgeRecipe implements IForgeRecipe {
                     else if (next instanceof ArrayList)
                     {
                         match = ForgeRecipeUtils.itemMatches((ArrayList<ItemStack>) next, slot);
-                    }
-                    else if (next instanceof ItemOre)
-                    {
-
-                        match = ((ItemOre) next).isItemEqual(slot);
-                    }
-                    else if (next instanceof ItemFilledContainer)
-                    {
-
-                        match = ((ItemFilledContainer) next).isItemEqual(slot);
                     }
                     else if (next instanceof ICraftingMaterial)
                     {
@@ -240,14 +229,6 @@ public class ShapelessForgeRecipe implements IForgeRecipe {
                         items.add(item.copy());
                     }
                     recipe[i] = items;
-                }
-                else if (in instanceof ItemOre)
-                {
-                    recipe[i] = ((ItemOre) in).getOres();
-                }
-                else if (in instanceof ItemFilledContainer)
-                {
-                    recipe[i] = ((ItemFilledContainer) in).getFilledContainers();
                 }
                 else if (in instanceof ICraftingMaterial)
                 {
