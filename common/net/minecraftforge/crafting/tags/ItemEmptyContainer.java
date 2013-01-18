@@ -22,19 +22,26 @@ public class ItemEmptyContainer {
     {
         this(exact, null);
     }
-    
+
     public ItemEmptyContainer(ItemStack[] excludes)
     {
         this(false, excludes);
     }
-    
+
     public ItemEmptyContainer(boolean exact, ItemStack[] excludes)
     {
         this.exact = exact;
-        this.excludes = new ItemStack[excludes.length];
-        for(int i = 0; i < excludes.length; ++i)
+        if (excludes != null)
         {
-            this.excludes[i] = excludes[i].copy();
+            this.excludes = new ItemStack[excludes.length];
+            for (int i = 0; i < excludes.length; ++i)
+            {
+                this.excludes[i] = excludes[i].copy();
+            }
+        }
+        else
+        {
+            this.excludes = null;
         }
     }
 
