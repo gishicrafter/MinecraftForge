@@ -19,7 +19,7 @@ import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class ShapelessLiquidFillingRecipe implements IForgeRecipe {
+public class ShapelessLiquidFillingRecipe implements IRecipeExtractable {
 
     private LiquidStack output = null;
     private ArrayList input = new ArrayList();

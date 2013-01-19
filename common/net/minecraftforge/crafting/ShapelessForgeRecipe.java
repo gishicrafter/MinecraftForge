@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.crafting.tags.ItemFilledContainer;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class ShapelessForgeRecipe implements IForgeRecipe {
+public class ShapelessForgeRecipe implements IRecipeExtractable {
 
     private ItemStack output = null;
     private ArrayList input = new ArrayList();

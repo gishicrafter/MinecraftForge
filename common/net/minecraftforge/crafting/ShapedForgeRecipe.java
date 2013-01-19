@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.crafting.tags.ItemFilledContainer;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class ShapedForgeRecipe implements IForgeRecipe {
+public class ShapedForgeRecipe implements IRecipeExtractable {
     // Added in for future ease of change, but hard coded for now.
     private static final int MAX_CRAFT_GRID_WIDTH = 3;
     private static final int MAX_CRAFT_GRID_HEIGHT = 3;

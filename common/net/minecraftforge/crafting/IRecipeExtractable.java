@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.item.crafting.IRecipe;
 
-public interface IForgeRecipe extends IRecipe {
+public interface IRecipeExtractable extends IRecipe{
 
     /**
      * Gets the copy of the raw input and output. The output items should be
