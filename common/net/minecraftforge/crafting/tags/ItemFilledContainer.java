@@ -18,86 +18,25 @@ public class ItemFilledContainer implements ICraftingMaterial {
     protected int amount;
     protected boolean exact;
     protected ItemStack[] excludes;
-    protected ItemStack defaultItem;
 
     public ItemFilledContainer(String name, int amount)
     {
-        this(name, amount, false, (ItemStack) null);
-    }
-
-    public ItemFilledContainer(String name, int amount, Block defaultItem)
-    {
-        this(name, amount, false, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, Item defaultItem)
-    {
-        this(name, amount, false, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, ItemStack defaultItem)
-    {
-        this(name, amount, false, defaultItem);
+        this(name, amount, false, null);
     }
 
     public ItemFilledContainer(String name, int amount, boolean exact)
     {
-        this(name, amount, exact, (ItemStack) null);
-    }
-
-    public ItemFilledContainer(String name, int amount, boolean exact, Block defaultItem)
-    {
-        this(name, amount, exact, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, boolean exact, Item defaultItem)
-    {
-        this(name, amount, exact, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, boolean exact, ItemStack defaultItem)
-    {
-        this(name, amount, exact, null, defaultItem);
+        this(name, amount, exact, null);
     }
 
     public ItemFilledContainer(String name, int amount, ItemStack[] excludes)
     {
-        this(name, amount, excludes, (ItemStack) null);
-    }
-
-    public ItemFilledContainer(String name, int amount, ItemStack[] excludes, Block defaultItem)
-    {
-        this(name, amount, excludes, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, ItemStack[] excludes, Item defaultItem)
-    {
-        this(name, amount, excludes, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, ItemStack[] excludes, ItemStack defaultItem)
-    {
-        this(name, amount, false, excludes, defaultItem);
+        this(name, amount, false, excludes);
     }
 
     public ItemFilledContainer(String name, int amount, boolean exact, ItemStack[] excludes)
     {
-        this(name, amount, exact, excludes, (ItemStack) null);
-    }
-
-    public ItemFilledContainer(String name, int amount, boolean exact, ItemStack[] excludes, Block defaultItem)
-    {
-        this(name, amount, exact, excludes, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, boolean exact, ItemStack[] excludes, Item defaultItem)
-    {
-        this(name, amount, exact, excludes, new ItemStack(defaultItem));
-    }
-
-    public ItemFilledContainer(String name, int amount, boolean exact, ItemStack[] excludes, ItemStack defaultItem)
-    {
-        this(null, name, amount, exact, excludes, defaultItem);
+        this(null, name, amount, exact, excludes);
     }
 
     public ItemFilledContainer(LiquidStack liquid)
@@ -117,10 +56,10 @@ public class ItemFilledContainer implements ICraftingMaterial {
 
     public ItemFilledContainer(LiquidStack liquid, boolean exact, ItemStack[] excludes)
     {
-        this(liquid, null, liquid.amount, exact, excludes, null);
+        this(liquid, null, liquid.amount, exact, excludes);
     }
 
-    protected ItemFilledContainer(LiquidStack liquid, String name, int amount, boolean exact, ItemStack[] excludes, ItemStack defaultItem)
+    protected ItemFilledContainer(LiquidStack liquid, String name, int amount, boolean exact, ItemStack[] excludes)
     {
         this.liquid = liquid != null ? liquid.copy() : null;
         this.name = name;
@@ -135,7 +74,6 @@ public class ItemFilledContainer implements ICraftingMaterial {
         }else{
             this.excludes = null;
         }
-        this.defaultItem = defaultItem!=null?defaultItem.copy():null;
     }
 
     @Override
@@ -150,7 +88,7 @@ public class ItemFilledContainer implements ICraftingMaterial {
 
         if (this.liquid == null)
         {
-            return defaultItem != null && defaultItem.isItemEqual(other);
+            return false;
         }
 
         LiquidStack liquid = LiquidContainerRegistry.getLiquidForFilledItem(other);
@@ -170,10 +108,6 @@ public class ItemFilledContainer implements ICraftingMaterial {
 
         if (liquid == null)
         {
-            if(defaultItem != null)
-            {
-                result.add(defaultItem);
-            }
             return result;
         }
 
