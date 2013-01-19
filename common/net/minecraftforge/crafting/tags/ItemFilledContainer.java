@@ -141,6 +141,8 @@ public class ItemFilledContainer implements ICraftingMaterial {
     @Override
     public boolean isItemEqual(ItemStack other)
     {
+        if(other == null) return false;
+        
         if (this.liquid == null && name != null)
         {
             this.liquid = LiquidDictionary.getLiquid(name, amount);

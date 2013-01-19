@@ -18,10 +18,8 @@ public class ItemOre implements ICraftingMaterial {
     @Override
     public boolean isItemEqual(ItemStack other)
     {
-        if (other == null)
-        {
-            return false;
-        }
+        if (other == null) return false;
+        
         ArrayList<ItemStack> items = OreDictionary.getOres(name);
         if (items == null || items.isEmpty())
         {
@@ -40,7 +38,6 @@ public class ItemOre implements ICraftingMaterial {
     @Override
     public ArrayList<ItemStack> getItems()
     {
-        // TODO Auto-generated method stub
         return OreDictionary.getOres(name);
     }
 }
