@@ -28,6 +28,8 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
     private int width = 0;
     private int height = 0;
     private boolean mirrored = true;
+    
+    // If true, matching fails when there are same items in the input matrix and output result.
     private boolean excludeSame = true;
 
     public ShapedLiquidFillingRecipe(LiquidStack result, Object... recipe)
