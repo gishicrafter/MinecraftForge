@@ -67,10 +67,10 @@ public class ItemEmptyContainer {
 
     public ArrayList<ItemStack> getFilledContainers(LiquidStack liquid)
     {
-        if(liquid == null) return null;
-        
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
 
+        if(liquid == null) return result;
+        
         for (LiquidContainerData data : LiquidContainerRegistry.getRegisteredLiquidContainerData())
         {
             if (data.stillLiquid.isLiquidEqual(liquid)
@@ -100,10 +100,10 @@ public class ItemEmptyContainer {
 
     public ArrayList<LiquidContainerData> getLiquidContainerData(LiquidStack liquid)
     {
-        if(liquid == null) return null;
-        
         ArrayList<LiquidContainerData> result = new ArrayList<LiquidContainerData>();
 
+        if(liquid == null) return result;
+        
         for (LiquidContainerData data : LiquidContainerRegistry.getRegisteredLiquidContainerData())
         {
             if (data.stillLiquid.isLiquidEqual(liquid)
