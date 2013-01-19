@@ -47,6 +47,19 @@ public class ItemEmptyContainer {
 
     public ItemStack getFilledContainer(LiquidStack liquid, ItemStack container)
     {
+        if(container == null) return null;
+        
+        if(excludes != null)
+        {
+            for(ItemStack item : excludes)
+            {
+                if (item.getItemDamage() == -1 && item.itemID == container.itemID || item.isItemEqual(container))
+                {
+                    return null;
+                }
+            }
+        }
+        
         ItemStack filled = LiquidContainerRegistry.fillLiquidContainer(liquid, container);
 
         if (filled != null)

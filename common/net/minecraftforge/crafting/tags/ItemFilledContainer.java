@@ -81,6 +81,17 @@ public class ItemFilledContainer implements ICraftingMaterial {
     {
         if(other == null) return false;
         
+        if(excludes != null)
+        {
+            for(ItemStack item : excludes)
+            {
+                if (item.getItemDamage() == -1 && item.itemID == other.itemID || item.isItemEqual(other))
+                {
+                    return false;
+                }
+            }
+        }
+        
         if (this.liquid == null && name != null)
         {
             this.liquid = LiquidDictionary.getLiquid(name, amount);
@@ -118,7 +129,7 @@ public class ItemFilledContainer implements ICraftingMaterial {
             {
                 if (excludes != null)
                 {
-                    boolean include = true;;
+                    boolean include = true;
                     for (ItemStack item : excludes)
                     {
                         if (item.getItemDamage() == -1 && item.itemID == data.filled.itemID || item.isItemEqual(data.filled))
