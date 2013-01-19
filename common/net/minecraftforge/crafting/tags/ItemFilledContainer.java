@@ -21,7 +21,7 @@ public class ItemFilledContainer implements ICraftingMaterial {
 
     public ItemFilledContainer(String name, int amount)
     {
-        this(name, amount, false, null);
+        this(name, amount, false);
     }
 
     public ItemFilledContainer(String name, int amount, boolean exact)
