@@ -52,9 +52,9 @@ public class ShapelessForgeRecipe implements IRecipeExtractable {
             {
                 input.add(new ItemFilledContainer((LiquidStack) in));
             }
-            else if (in instanceof Collection)
+            else if (in instanceof Collection && ForgeRecipeUtils.isValidItemList((Collection)in))
             {
-                input.add(new ArrayList<ItemStack>((Collection<ItemStack>) in));
+                input.add(new ArrayList((Collection) in));
             }
             else if (in instanceof ICraftingMaterial)
             {
@@ -89,9 +89,9 @@ public class ShapelessForgeRecipe implements IRecipeExtractable {
                     {
                         finalObj = value;
                     }
-                    else if (value instanceof Collection)
+                    else if (value instanceof Collection && ForgeRecipeUtils.isValidItemList((Collection)value))
                     {
-                        finalObj = new ArrayList<ItemStack>((Collection<ItemStack>) value);
+                        finalObj = new ArrayList((Collection) value);
                     }
                     else if (value instanceof LiquidStack)
                     {
@@ -130,7 +130,7 @@ public class ShapelessForgeRecipe implements IRecipeExtractable {
                     }
                     else if (next instanceof ArrayList)
                     {
-                        match = ForgeRecipeUtils.itemMatches((ArrayList<ItemStack>) next, slot);
+                        match = ForgeRecipeUtils.itemMatches((ArrayList) next, slot);
                     }
                     else if (next instanceof ICraftingMaterial)
                     {
@@ -190,10 +190,17 @@ public class ShapelessForgeRecipe implements IRecipeExtractable {
                 }
                 else if (in instanceof ArrayList)
                 {
-                    ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-                    for (ItemStack item : (ArrayList<ItemStack>) in)
+                    ArrayList items = new ArrayList();
+                    for (Object item : (ArrayList) in)
                     {
-                        items.add(item.copy());
+                        if(item instanceof ItemStack)
+                        {
+                            items.add(((ItemStack)item).copy());
+                        }
+                        else
+                        {
+                            items.add(item);
+                        }
                     }
                     recipe[i] = items;
                 }
@@ -223,12 +230,7 @@ public class ShapelessForgeRecipe implements IRecipeExtractable {
                 }
                 else if (in instanceof ArrayList)
                 {
-                    ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-                    for (ItemStack item : (ArrayList<ItemStack>) in)
-                    {
-                        items.add(item.copy());
-                    }
-                    recipe[i] = items;
+                    recipe[i] = ForgeRecipeUtils.expandArray((ArrayList)in);
                 }
                 else if (in instanceof ICraftingMaterial)
                 {

@@ -1,6 +1,11 @@
 package net.minecraftforge.crafting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 
@@ -20,12 +25,12 @@ public class ForgeRecipeUtils {
         return target.itemID == input.itemID && (target.getItemDamage() == -1 && !strict || target.getItemDamage() == input.getItemDamage());
     }
 
-    public static boolean itemMatches(ArrayList<ItemStack> targets, ItemStack input)
+    public static boolean itemMatches(ArrayList targets, ItemStack input)
     {
         return itemMatches(targets, input, false);
     }
 
-    public static boolean itemMatches(ArrayList<ItemStack> targets, ItemStack input, boolean strict)
+    public static boolean itemMatches(ArrayList targets, ItemStack input, boolean strict)
     {
         if (input == null && targets != null && targets.size() > 0 || input != null && (targets == null || targets.size() == 0))
         {
@@ -35,13 +40,51 @@ public class ForgeRecipeUtils {
         {
             return true;
         }
-        for (ItemStack target : targets)
+        for (Object target : targets)
         {
-            if (itemMatches(target, input, strict))
+            if (target instanceof ItemStack && itemMatches((ItemStack)target, input, strict))
+            {
+                return true;
+            }
+            else if(target instanceof ICraftingMaterial && ((ICraftingMaterial)target).isItemEqual(input))
             {
                 return true;
             }
         }
         return false;
+    }
+    
+    public static ArrayList<ItemStack> expandArray(ArrayList items)
+    {
+        Map<List, ItemStack> tmp = new HashMap<List, ItemStack>();
+        for(Object item : items)
+        {
+            if(item instanceof ItemStack)
+            {
+                tmp.put(Arrays.asList(((ItemStack)item).itemID, ((ItemStack)item).getItemDamage()), ((ItemStack)item).copy());
+            }
+            else if(item instanceof ICraftingMaterial)
+            {
+                for(ItemStack subitem : ((ICraftingMaterial)item).getItems())
+                {
+                    tmp.put(Arrays.asList(subitem.itemID, subitem.getItemDamage()), subitem);
+                }
+            }
+        }
+        
+        return new ArrayList<ItemStack>(tmp.values());
+    }
+    
+    public static boolean isValidItemList(Collection items)
+    {
+        for(Object item : items)
+        {
+            if(!(item instanceof ItemStack || item instanceof ICraftingMaterial))
+            {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

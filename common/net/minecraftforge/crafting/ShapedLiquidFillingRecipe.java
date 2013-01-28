@@ -109,9 +109,9 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
             {
                 itemMap.put(chr, new ItemFilledContainer((LiquidStack) in));
             }
-            else if (in instanceof Collection)
+            else if (in instanceof Collection && ForgeRecipeUtils.isValidItemList((Collection)in))
             {
-                itemMap.put(chr, new ArrayList<ItemStack>((Collection<ItemStack>) in));
+                itemMap.put(chr, new ArrayList((Collection) in));
             }
             else if (in instanceof ItemEmptyContainer || in instanceof ICraftingMaterial)
             {
@@ -166,9 +166,9 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
                     {
                         input[i] = value;
                     }
-                    else if (value instanceof Collection)
+                    else if (value instanceof Collection && ForgeRecipeUtils.isValidItemList((Collection)value))
                     {
-                        input[i] = new ArrayList<ItemStack>((Collection<ItemStack>) value);
+                        input[i] = new ArrayList((Collection) value);
                     }
                     else if (value instanceof LiquidStack)
                     {
@@ -250,7 +250,7 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
                 else if (target instanceof ArrayList)
                 {
 
-                    if (!ForgeRecipeUtils.itemMatches((ArrayList<ItemStack>) target, slot))
+                    if (!ForgeRecipeUtils.itemMatches((ArrayList) target, slot))
                     {
                         return null;
                     }
@@ -336,10 +336,17 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
                 }
                 else if (input[i] instanceof ArrayList)
                 {
-                    ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-                    for (ItemStack item : (ArrayList<ItemStack>) input[i])
+                    ArrayList items = new ArrayList();
+                    for (Object item : (ArrayList) input[i])
                     {
-                        items.add(item.copy());
+                        if(item instanceof ItemStack)
+                        {
+                            items.add(((ItemStack)item).copy());
+                        }
+                        else
+                        {
+                            items.add(item);
+                        }
                     }
                     recipe[i] = items;
                 }
@@ -399,11 +406,11 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
                 else if (input[i] instanceof ArrayList)
                 {
                     ArrayList<ItemStack> acceptable = new ArrayList<ItemStack>();
-                    for (ItemStack item : (ArrayList<ItemStack>) input[i])
+                    for (ItemStack item : ForgeRecipeUtils.expandArray((ArrayList)input[i]))
                     {
                         if (!excludeSame || !item.isItemEqual(output))
                         {
-                            acceptable.add(item.copy());
+                            acceptable.add(item);
                         }
                     }
                     if (acceptable.size() == 0)
