@@ -16,7 +16,7 @@ public class ItemOre implements ICraftingMaterial {
     }
 
     @Override
-    public boolean isItemEqual(ItemStack other)
+    public boolean itemMatches(ItemStack other)
     {
         if (other == null) return false;
         

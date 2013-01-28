@@ -141,7 +141,7 @@ public class ShapelessLiquidFillingRecipe implements IRecipeExtractable {
                     else if (next instanceof ICraftingMaterial)
                     {
 
-                        match = ((ICraftingMaterial) next).isItemEqual(slot);
+                        match = ((ICraftingMaterial) next).itemMatches(slot);
                     }
                     else if (next instanceof ItemEmptyContainer)
                     {

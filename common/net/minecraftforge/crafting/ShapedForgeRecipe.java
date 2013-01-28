@@ -265,7 +265,7 @@ public class ShapedForgeRecipe implements IRecipeExtractable {
                 else if (target instanceof ICraftingMaterial)
                 {
 
-                    if (!((ICraftingMaterial) target).isItemEqual(slot))
+                    if (!((ICraftingMaterial) target).itemMatches(slot))
                     {
                         return false;
                     }

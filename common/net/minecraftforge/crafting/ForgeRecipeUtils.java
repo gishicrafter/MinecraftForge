@@ -46,7 +46,7 @@ public class ForgeRecipeUtils {
             {
                 return true;
             }
-            else if(target instanceof ICraftingMaterial && ((ICraftingMaterial)target).isItemEqual(input))
+            else if(target instanceof ICraftingMaterial && ((ICraftingMaterial)target).itemMatches(input))
             {
                 return true;
             }

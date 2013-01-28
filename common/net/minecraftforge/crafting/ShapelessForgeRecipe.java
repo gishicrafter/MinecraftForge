@@ -135,7 +135,7 @@ public class ShapelessForgeRecipe implements IRecipeExtractable {
                     else if (next instanceof ICraftingMaterial)
                     {
 
-                        match = ((ICraftingMaterial) next).isItemEqual(slot);
+                        match = ((ICraftingMaterial) next).itemMatches(slot);
                     }
 
                     if (match)

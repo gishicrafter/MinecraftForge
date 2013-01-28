@@ -258,7 +258,7 @@ public class ShapedLiquidFillingRecipe implements IRecipeExtractable {
                 else if (target instanceof ICraftingMaterial)
                 {
 
-                    if (!((ICraftingMaterial) target).isItemEqual(slot))
+                    if (!((ICraftingMaterial) target).itemMatches(slot))
                     {
                         return null;
                     }
