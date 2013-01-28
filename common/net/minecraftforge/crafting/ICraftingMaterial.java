@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 public interface ICraftingMaterial {
 
     /**
-     * Compare argument ItemStack to this instance.
+     * Compares argument ItemStack to this instance.
      * 
      * @param other
      *            ItemStack to compare.
@@ -16,7 +16,7 @@ public interface ICraftingMaterial {
     boolean isItemEqual(ItemStack other);
 
     /**
-     * Makes a list of ItemStacks those this instance represents.
+     * Makes a list of ItemStacks that this instance represents.
      * 
      * @return
      */

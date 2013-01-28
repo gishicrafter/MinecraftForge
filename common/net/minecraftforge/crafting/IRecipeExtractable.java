@@ -16,8 +16,8 @@ public interface IRecipeExtractable extends IRecipe{
     public Object[] getRawRecipe();
 
     /**
-     * Gets a list of recipes that this instance can process. All elements of
-     * recipe should be instances of ItemStack or ArrayList<ItemStack>. The
+     * Gets a list of recipes which this instance can process. All elements of
+     * recipe should be instances of ItemStack or ArrayList&lt;ItemStack&gt;. The
      * length of each recipe should be getRecipeSize() + 1, and the output item
      * should be assigned into the last element.
      * 

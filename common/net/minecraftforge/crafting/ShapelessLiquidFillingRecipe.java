@@ -24,7 +24,7 @@ public class ShapelessLiquidFillingRecipe implements IRecipeExtractable {
     private LiquidStack output = null;
     private ArrayList input = new ArrayList();
     
-    // If true, matching fails when there are same items in the input matrix and output result.
+    // If this member is true, matching fails when there are same items in the input matrix and output result.
     private boolean excludeSame = true;
 
     public ShapelessLiquidFillingRecipe(LiquidStack result, Object... recipe)
@@ -336,4 +336,9 @@ public class ShapelessLiquidFillingRecipe implements IRecipeExtractable {
         return result;
     }
 
+    public ShapelessLiquidFillingRecipe setExcludeSame(boolean exclude)
+    {
+        excludeSame = exclude;
+        return this;
+    }
 }
